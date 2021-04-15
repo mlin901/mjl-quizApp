@@ -1,2 +1,2 @@
-var blah = document.getElementById('blah');
-blah.textContent = "Jane";
+var mainTextEl = document.getElementById('mainText');
+mainTextEl.textContent = "Quiz over. Please enter you initials and press Done.";
