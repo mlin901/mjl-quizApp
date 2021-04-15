@@ -2,6 +2,7 @@
 var timerEl = document.getElementById('countdown');
 // Place in doc for text [???????]
 var mainEl = document.getElementById('main');
+var bodyEl = document.getElementsByTagName('body');
 
 // objects and variables for quiz questions
 var q1 = {
@@ -27,14 +28,21 @@ function askQuestion() {
     mainEl.textContent = questions[questionIndex].q;
     console.log(questions[questionIndex].answers[0]);
     for (let i = 0; i < 4; i++) {
-        var btn = document.createElement("button");   
+        var btn = document.createElement("button");  
+        btn.id = "button" + i; 
         btn.innerHTML = questions[questionIndex].answers[i];                   
         document.body.appendChild(btn);  
     }
     questionIndex++;
 
     // On button click, present next question and result of last q.
-
+    // Adapted from https://davidwalsh.name/event-delegate
+    document.addEventListener("click",function(event) {
+        // event.target was the clicked element
+        if (event.target && event.target.matches("button")) {
+            console.log("Excelsior!!!!!");
+        }
+    });
 }
 
 // Timer function (adapted from 10-Stu_timers-Intervals activity)
