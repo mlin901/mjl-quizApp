@@ -6,18 +6,18 @@ var bodyEl = document.getElementsByTagName('body');
 
 // objects and variables for quiz questions
 var q1 = {
-    q: "How beautiful is Jane?", 
+    q: "First queastion", 
     answers: ["All of these", "Exceedingly", "Overwhelmingly", "Inordinately"],
     correct: 1
 };
 var q2 = {
-    q: "How Hungry are the cats?", 
-    answers: ["All of these", "Exceedingly", "Overwhelmingly", "Inordinately"],
+    q: "Second question", 
+    answers: ["1", "2", "3", "4"],
     correct: 1
 };
 var q3 = {
-    q: "How great is Mauser?", 
-    answers: ["All of these", "Exceedingly", "Overwhelmingly", "Inordinately"],
+    q: "Third question", 
+    answers: ["A", "B", "C", "D"],
     correct: 1
 };
 var questions = [q1, q2, q3];
@@ -25,29 +25,35 @@ var questionIndex = 0;
 
 // Function to ask questions
 function askQuestion() {
-    mainEl.textContent = questions[questionIndex].q;
-    console.log(questions[questionIndex].answers[0]);
-    for (let i = 0; i < 4; i++) {
-        var btn = document.createElement("button");  
-        btn.id = "button" + i; 
-        btn.innerHTML = questions[questionIndex].answers[i];                   
-        document.body.appendChild(btn);  
+    // Add question text to page
+    // If there's another question...
+    console.log(questionIndex); 
+    console.log(questions.length);
+    if (questionIndex < questions.length) {
+        mainEl.textContent = questions[questionIndex].q;
+        // Add buttons for mult-choice questions to page
+        for (let i = 0; i < questions[questionIndex].answers.length; i++) {
+            var ifBtn = document.getElementById("button"+i);
+            if (ifBtn !== null) {
+                ifBtn.innerHTML = questions[questionIndex].answers[i];   //***                 
+            } else {
+                console.log("No buttons yet - creating..."); 
+                var ifBtn = document.createElement("button");  
+                ifBtn.id = "button" + i;
+                ifBtn.innerHTML = questions[questionIndex].answers[i];  // *****                 
+                document.body.appendChild(ifBtn);  // *****
+            }
+        }
+    } else {
+        quizOver(); // ****really? 
     }
     questionIndex++;
-
-    // On button click, present next question and result of last q.
-    // Adapted from https://davidwalsh.name/event-delegate
-    document.addEventListener("click",function(event) {
-        // event.target was the clicked element
-        if (event.target && event.target.matches("button")) {
-            console.log("Excelsior!!!!!");
-        }
-    });
+    // return
 }
 
 // Timer function (adapted from 10-Stu_timers-Intervals activity)
 function countdown() {
-  var timeLeft = 3;
+  var timeLeft = 10;
   timerEl.textContent = timeLeft;
   var timeInterval = setInterval(function () {
     if (timeLeft >= 1) {
@@ -60,6 +66,16 @@ function countdown() {
     }
   }, 1000);
 }
+
+// On button click, present next question and result of last q.
+// Adapted from https://davidwalsh.name/event-delegate
+document.addEventListener("click",function(event) {
+    // event.target was the clicked element
+    if (event.target && event.target.matches("button")) {
+        console.log("Excelsior!!!!!");
+        askQuestion();
+    }
+});
 
 // When time's up or all questions have been asnwered...
 function quizOver() {
