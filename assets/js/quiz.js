@@ -8,43 +8,41 @@ var bodyEl = document.getElementsByTagName('body');
 var q1 = {
     q: "First queastion", 
     answers: ["All of these", "Exceedingly", "Overwhelmingly", "Inordinately"],
-    correct: 1
+    correct: "button0"
 };
 var q2 = {
     q: "Second question", 
     answers: ["1", "2", "3", "4"],
-    correct: 1
+    correct: "button0"
 };
 var q3 = {
     q: "Third question", 
     answers: ["A", "B", "C", "D"],
-    correct: 1
+    correct: "button0"
 };
 var questions = [q1, q2, q3];
 var questionIndex = 0;
 
 // Function to ask questions
 function askQuestion() {
-    // Add question text to page
     // If there's another question...
-    console.log(questionIndex); 
-    console.log(questions.length);
     if (questionIndex < questions.length) {
+        // Add question text to page
         mainEl.textContent = questions[questionIndex].q;
         // Add buttons for mult-choice questions to page
         for (let i = 0; i < questions[questionIndex].answers.length; i++) {
             var ifBtn = document.getElementById("button"+i);
+            // If button exists...
             if (ifBtn !== null) {
                 ifBtn.innerHTML = questions[questionIndex].answers[i];   //***                 
-            } else {
-                console.log("No buttons yet - creating..."); 
+            } else {  //If button doesn't yet exist...
                 var ifBtn = document.createElement("button");  
                 ifBtn.id = "button" + i;
                 ifBtn.innerHTML = questions[questionIndex].answers[i];  // *****                 
                 document.body.appendChild(ifBtn);  // *****
             }
         }
-    } else {
+    } else {  // If there are no more questions...
         quizOver(); // ****really? 
     }
     questionIndex++;
@@ -60,11 +58,22 @@ function countdown() {
       timerEl.textContent = timeLeft;
       timeLeft--;
     } else {
-      timerEl.textContent = '';
+    //   timerEl.textContent = '';
       clearInterval(timeInterval);
       quizOver();
     }
   }, 1000);
+}
+
+// Did they click the right answer?
+function evaluateAnswer(clickedBtn) {
+    console.log(clickedBtn);
+    console.log(questions[questionIndex].correct);
+    if (clickedBtn == questions[questionIndex].correct) {
+        console.log("Oh, heck yeah");
+    } else {
+        console.log("Nooooo");
+    }
 }
 
 // On button click, present next question and result of last q.
@@ -72,7 +81,8 @@ function countdown() {
 document.addEventListener("click",function(event) {
     // event.target was the clicked element
     if (event.target && event.target.matches("button")) {
-        console.log("Excelsior!!!!!");
+        console.log("Excelsior!!!!! " + event.target.id); //**** */
+        evaluateAnswer(event.target.id);
         askQuestion();
     }
 });
