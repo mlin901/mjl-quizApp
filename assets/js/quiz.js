@@ -7,18 +7,23 @@ var bodyEl = document.getElementsByTagName('body');
 // objects and variables for quiz questions
 var q1 = {
     q: "First queastion", 
-    answers: ["All of these", "Exceedingly", "Overwhelmingly", "Inordinately"],
+    answers: ["correct", "Exceedingly", "Overwhelmingly", "Inordinately"],
     correct: "button0"
 };
 var q2 = {
     q: "Second question", 
-    answers: ["1", "2", "3", "4"],
-    correct: "button0"
+    answers: ["1", "correct", "3", "4"],
+    correct: "button1"
 };
 var q3 = {
     q: "Third question", 
-    answers: ["A", "B", "C", "D"],
-    correct: "button0"
+    answers: ["A", "B", "Correct", "D"],
+    correct: "button2"
+};
+var q4 = {
+    q: "Fourth question", 
+    answers: ["alph", "Beta", "gamma", "correct"],
+    correct: "button3"
 };
 var questions = [q1, q2, q3];
 var questionIndex = 0;
@@ -68,8 +73,8 @@ function countdown() {
 // Did they click the right answer?
 function evaluateAnswer(clickedBtn) {
     console.log(clickedBtn);
-    console.log(questions[questionIndex].correct);
-    if (clickedBtn == questions[questionIndex].correct) {
+    console.log(questions[questionIndex-1].correct);
+    if (clickedBtn == questions[questionIndex-1].correct) {
         console.log("Oh, heck yeah");
     } else {
         console.log("Nooooo");
