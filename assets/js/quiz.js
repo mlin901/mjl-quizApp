@@ -1,4 +1,4 @@
-var timeLeft = 10;
+var timeLeft = 30;
 // Place in doc for timer
 var timerEl = document.getElementById('countdown');
 // Place in doc for text [???????]
@@ -7,7 +7,7 @@ var feedbackEl = document.getElementById('feedback');
 
 // objects and variables for quiz questions
 var q1 = {
-    q: "First queastion", 
+    q: "First question", 
     answers: ["correct", "Exceedingly", "Overwhelmingly", "Inordinately"],
     correct: "button0"
 };
@@ -23,10 +23,10 @@ var q3 = {
 };
 var q4 = {
     q: "Fourth question", 
-    answers: ["alph", "Beta", "gamma", "correct"],
+    answers: ["alpha", "Beta", "gamma", "correct"],
     correct: "button3"
 };
-var questions = [q1, q2, q3];
+var questions = [q1, q2, q3, q4];
 var questionIndex = 0;
 
 // Function to ask questions
@@ -48,8 +48,10 @@ function askQuestion() {
                 document.body.appendChild(ifBtn);  // *****
             }
         }
+        
     } else {  // If there are no more questions...
-        quizOver(); // ****really? 
+        setTimeout(function(){ quizOver(); }, 30000);
+        // quizOver(); // ****really? 
     }
     questionIndex++;
     // return
@@ -70,42 +72,42 @@ function countdown() {
   }, 1000);
 }
 
-// Did they click the right answer?
+// Determine if user clicked the correct answer?
 function evaluateAnswer(clickedBtn) {
-    // console.log(clickedBtn);
-    // console.log(questions[questionIndex-1].correct);
-
     // If answer is correct...
     if (clickedBtn == questions[questionIndex-1].correct) {
         console.log("Oh, heck yeah");
         // ***** Display a "correct" message
         feedbackEl.textContent = "Correct!";
-        // increment counter for correct answers
+        // increment counter for correct answers ******
 
     } else { // If answer is wrong...
         console.log("Nooooo");
         // Display an "incorrect message"
         feedbackEl.textContent = "Wrong!";
-        // Remove 5 seconds from timer
-        timeLeft = timeLeft - 3;
+        // Remove a few seconds from timer for wrong answer
+        timeLeft = timeLeft - 2;
     }
-}
+    askQuestion();  
 
 // On button click, present next question and result of last q.
 // Adapted from https://davidwalsh.name/event-delegate
 document.addEventListener("click",function(event) {
     // event.target was the clicked element
     if (event.target && event.target.matches("button")) {
-        // console.log("Excelsior!!!!! " + event.target.id); 
-        evaluateAnswer(event.target.id);
-        askQuestion();
+        if (questionIndex < questions.length) { // !!!!!!!!!!!!!!!!!
+        evaluateAnswer(event.target.id);  
+        } else {
+            console.log("!!!!!!!!!!!!!"); // !!!!!!!!!!!!!!
+            setTimeout(function(){ quizOver(); }, 1000); // SO WHAT HAPPENS WITH THE OTHER ONE?
+        }
     }
 });
 
-// When time's up or all questions have been asnwered...
+// When time's up or all questions have been answered...
 function quizOver() {
     window.location.href = './quizover.html';
 }
 
-askQuestion();
 countdown();
+askQuestion();
