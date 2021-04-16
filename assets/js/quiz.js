@@ -89,16 +89,16 @@ function evaluateAnswer(clickedBtn) {
         timeLeft = timeLeft - 2;
     }
     askQuestion();  
+}
 
 // On button click, present next question and result of last q.
 // Adapted from https://davidwalsh.name/event-delegate
 document.addEventListener("click",function(event) {
     // event.target was the clicked element
     if (event.target && event.target.matches("button")) {
-        if (questionIndex < questions.length) { // !!!!!!!!!!!!!!!!!
+        if (questionIndex < questions.length) { 
         evaluateAnswer(event.target.id);  
         } else {
-            console.log("!!!!!!!!!!!!!"); // !!!!!!!!!!!!!!
             setTimeout(function(){ quizOver(); }, 1000); // SO WHAT HAPPENS WITH THE OTHER ONE?
         }
     }
