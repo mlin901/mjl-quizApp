@@ -94,10 +94,10 @@ document.addEventListener("click",function(event) {
     // If the click is on a button...
     if (event.target && event.target.matches("button")) {
         // If we haven't already evaluated the last question...
-        if (questionIndex <= questions.length) { 
+        if (questionIndex < questions.length) { 
             evaluateAnswer(event.target.id);  
         } else { // If all questions have been answered...
-            setTimeout(function(){ quizOver(); }, 200); // Brief pause before leaving page
+            setTimeout(function(){ quizOver(); }, 800); // Brief pause before leaving page
         }
     }
 });
