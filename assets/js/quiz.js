@@ -1,8 +1,9 @@
+var timeLeft = 10;
 // Place in doc for timer
 var timerEl = document.getElementById('countdown');
 // Place in doc for text [???????]
 var mainEl = document.getElementById('main');
-var bodyEl = document.getElementsByTagName('body');
+var feedbackEl = document.getElementById('feedback');
 
 // objects and variables for quiz questions
 var q1 = {
@@ -56,7 +57,6 @@ function askQuestion() {
 
 // Timer function (adapted from 10-Stu_timers-Intervals activity)
 function countdown() {
-  var timeLeft = 10;
   timerEl.textContent = timeLeft;
   var timeInterval = setInterval(function () {
     if (timeLeft >= 1) {
@@ -72,12 +72,22 @@ function countdown() {
 
 // Did they click the right answer?
 function evaluateAnswer(clickedBtn) {
-    console.log(clickedBtn);
-    console.log(questions[questionIndex-1].correct);
+    // console.log(clickedBtn);
+    // console.log(questions[questionIndex-1].correct);
+
+    // If answer is correct...
     if (clickedBtn == questions[questionIndex-1].correct) {
         console.log("Oh, heck yeah");
-    } else {
+        // ***** Display a "correct" message
+        feedbackEl.textContent = "Correct!";
+        // increment counter for correct answers
+
+    } else { // If answer is wrong...
         console.log("Nooooo");
+        // Display an "incorrect message"
+        feedbackEl.textContent = "Wrong!";
+        // Remove 5 seconds from timer
+        timeLeft = timeLeft - 3;
     }
 }
 
@@ -86,7 +96,7 @@ function evaluateAnswer(clickedBtn) {
 document.addEventListener("click",function(event) {
     // event.target was the clicked element
     if (event.target && event.target.matches("button")) {
-        console.log("Excelsior!!!!! " + event.target.id); //**** */
+        // console.log("Excelsior!!!!! " + event.target.id); 
         evaluateAnswer(event.target.id);
         askQuestion();
     }
