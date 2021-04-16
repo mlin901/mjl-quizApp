@@ -5,26 +5,33 @@ var mainEl = document.getElementById('main'); // Question text location
 var feedbackEl = document.getElementById('feedback'); // Location for "correct" or "wrong"
 
 // Objects for questions and possible answers
+// Questions adapted from From https://www.w3schools.com/js/js_quiz.asp
 var q1 = {
-    q: "First question", 
-    answers: ["correct", "Exceedingly", "Overwhelmingly", "Inordinately"],
-    correct: "button0"
-};
-var q2 = {
-    q: "Second question", 
-    answers: ["1", "correct", "3", "4"],
-    correct: "button1"
-};
-var q3 = {
-    q: "Third question", 
-    answers: ["A", "B", "Correct", "D"],
-    correct: "button2"
-};
-var q4 = {
-    q: "Fourth question", 
-    answers: ["alpha", "Beta", "gamma", "correct"],
+    q: "Which HTML tag do we use for JavaScript?", 
+    answers: ["<scripting>", "<js>", "<javascript>", "<script>"],
     correct: "button3"
 };
+var q2 = {
+    q: "Which is the correct syntax for linking to an external script?", 
+    answers: ["<script src=”xxx.js”>", "<script href=”xxx.js”>", "<script name=”xxx.js”>", "<script id=”xxx.js”>"],
+    correct: "button0"
+};
+var q3 = {
+    q: "How do you code an alert box?", 
+    answers: ["alertBox(\"Alert message!\");", "alert(\"Alert message!\");", "msg(\"Alert message!\");", "msgBox(\"Alert message!\");"],
+    correct: "button1"
+};
+var q4 = {
+    q: "Which of the following is a correctly-coded if statement test?", 
+    answers: ["if i = 1 then", "if i == 1 then", "if (i == 1)", "if i = 1"],
+    correct: "button2"
+};
+var q5 = {
+    q: "What did the Thunder say?", 
+    answers: ["DA", "Datta", "Dayadhvam", "Damyata"],
+    correct: "button0"
+};
+
 // Array and index for questions  ****Could I just create an array of objects?????*******
 var questions = [q1, q2, q3, q4];
 var questionIndex = 0;
@@ -97,7 +104,7 @@ document.addEventListener("click",function(event) {
         if (questionIndex < questions.length) { 
             evaluateAnswer(event.target.id);  
         } else { // If all questions have been answered...
-            setTimeout(function(){ quizOver(); }, 800); // Brief pause before leaving page
+            setTimeout(function(){ quizOver(); }, 700); // Brief pause before leaving page
         }
     }
 });
