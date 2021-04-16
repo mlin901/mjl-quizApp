@@ -10,7 +10,7 @@ var items = [];
 // console.log(score);
 
 scoreEl.textContent = "Your score: " + score; 
-mainTextEl.textContent = "Please enter you initials and press Return/Enter.";
+mainTextEl.textContent = "Please enter your initials and press Return/Enter.";
 
 // Event listener adapted from 22-Stu_Local-Storage, 24-Stu_Local_Storage_Objects,
 // and 26-Stu_Local-Storage-Todos activities
@@ -21,19 +21,26 @@ doneButton.addEventListener("click", function(event) {
     if (initials === "") {
         alert("Error: Initials field cannot be blank");
     } else {
-        //create user object from submission
+        // Create user object from submission
         var scoreObj = {
             initials: initials,
             score: score
         };
-        // // store to local storage 
+        // Store to local storage 
         items.push(scoreObj);
-        initials.value = "";
+        // initials.value = "";
 
         // Get existing scores from local storage, add new score and store
         var existingScores = JSON.parse(localStorage.getItem("quizScores"));
-        items.push(existingScores);
-        localStorage.setItem("quizScores", JSON.stringify(items));
+        if (existingScores) {
+
+            // items.push(existingScores);
+            var concat = items.concat(existingScores);
+            // var concat = existingScores.concat(items); 
+            localStorage.setItem("quizScores", JSON.stringify(concat));
+        } else {
+            localStorage.setItem("quizScores", JSON.stringify(items));
+        }
 
         alert("Score recorded");
         window.location.href = './scores.html';
