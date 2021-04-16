@@ -1,4 +1,5 @@
-var timeLeft = 30;
+var timeLeft = 30; // Timer variable
+var correctAnswers = 0; // Number of correct answers
 var timerEl = document.getElementById('countdown'); // Timer location
 var mainEl = document.getElementById('main'); // Question text location
 var feedbackEl = document.getElementById('feedback'); // Location for "correct" or "wrong"
@@ -24,8 +25,7 @@ var q4 = {
     answers: ["alpha", "Beta", "gamma", "correct"],
     correct: "button3"
 };
-// Array and index for questions  
-// ****Could I just create an array of objects?????*******
+// Array and index for questions  ****Could I just create an array of objects?????*******
 var questions = [q1, q2, q3, q4];
 var questionIndex = 0;
 
@@ -76,9 +76,9 @@ function countdown() {
 function evaluateAnswer(clickedBtn) {
     // If answer is correct...
     if (clickedBtn == questions[questionIndex-1].correct) {
-        console.log("Oh, heck yeah");
         feedbackEl.textContent = "Correct!";
         // increment counter for correct answers ******
+        correctAnswers++;
     } else { // If answer is wrong...
         feedbackEl.textContent = "Answer is incorrect.";
         // Remove a few seconds from timer for wrong answer
@@ -104,6 +104,7 @@ document.addEventListener("click",function(event) {
 
 // When time's up or all questions have been answered...
 function quizOver() {
+    localStorage.setItem("CurrentQuiz", correctAnswers);
     window.location.href = './quizover.html';
 }
 
