@@ -42,7 +42,7 @@ doneButton.addEventListener("click", function(event) {
             localStorage.setItem("quizScores", JSON.stringify(items));
         }
 
-        alert("Score recorded");
+        // alert("Score recorded");
         window.location.href = './scores.html';
     }
 });

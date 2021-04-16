@@ -8,12 +8,12 @@ var feedbackEl = document.getElementById('feedback'); // Location for "correct" 
 // Questions adapted from From https://www.w3schools.com/js/js_quiz.asp
 var q1 = {
     q: "Which HTML tag do we use for JavaScript?", 
-    answers: ["<scripting>", "<js>", "<javascript>", "<script>"],
+    answers: ["&lt;scripting&gt;", "&lt;js&gt;", "&lt;javascript&gt;", "&lt;script&gt;"],
     correct: "button3"
 };
 var q2 = {
     q: "Which is the correct syntax for linking to an external script?", 
-    answers: ["<script src=”xxx.js”>", "<script href=”xxx.js”>", "<script name=”xxx.js”>", "<script id=”xxx.js”>"],
+    answers: ["&lt;script src=\"xxx.js\"&gt;", "&lt;script href=\"xxx.js\"&gt;", "&lt;script name=\"xxx.js\"&gt;", "&lt;script id=\"xxx.js\"&gt;"],
     correct: "button0"
 };
 var q3 = {
@@ -22,18 +22,18 @@ var q3 = {
     correct: "button1"
 };
 var q4 = {
-    q: "Which of the following is a correctly-coded if statement test?", 
-    answers: ["if i = 1 then", "if i == 1 then", "if (i == 1)", "if i = 1"],
-    correct: "button2"
-};
-var q5 = {
     q: "What did the Thunder say?", 
     answers: ["DA", "Datta", "Dayadhvam", "Damyata"],
     correct: "button0"
 };
+var q5 = {
+    q: "Which of the following is a correctly-coded if statement test?", 
+    answers: ["if i = 1 then", "if i == 1 then", "if (i == 1)", "if i = 1"],
+    correct: "button2"
+};
 
 // Array and index for questions  ****Could I just create an array of objects?????*******
-var questions = [q1, q2, q3, q4];
+var questions = [q1, q2, q3, q4, q5];
 var questionIndex = 0;
 
 // Function to ask questions
@@ -55,9 +55,6 @@ function askQuestion() {
                 document.body.appendChild(ifBtn); 
             }
         }
-    // } else {  // If there are no more questions...
-    //     // setTimeout(function(){ quizOver(); }, 30000);
-    //     console.log("!!!!!!!!");
     }
     // Increment index so function acts on the next question 
     questionIndex++;
@@ -104,7 +101,7 @@ document.addEventListener("click",function(event) {
         if (questionIndex < questions.length) { 
             evaluateAnswer(event.target.id);  
         } else { // If all questions have been answered...
-            setTimeout(function(){ quizOver(); }, 700); // Brief pause before leaving page
+            quizOver();
         }
     }
 });
@@ -112,7 +109,8 @@ document.addEventListener("click",function(event) {
 // When time's up or all questions have been answered...
 function quizOver() {
     localStorage.setItem("CurrentQuiz", correctAnswers);
-    window.location.href = './quizover.html';
+    setTimeout(function(){ window.location.href = './quizover.html'; }, 800); // Brief pause before leaving page
+    // window.location.href = './quizover.html'; // **************
 }
 
 countdown();
