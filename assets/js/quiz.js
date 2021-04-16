@@ -48,10 +48,11 @@ function askQuestion() {
                 document.body.appendChild(ifBtn); 
             }
         }
-    } else {  // If there are no more questions...
-        setTimeout(function(){ quizOver(); }, 30000);
+    // } else {  // If there are no more questions...
+    //     // setTimeout(function(){ quizOver(); }, 30000);
+    //     console.log("!!!!!!!!");
     }
-    // Move to next question by incrementing index for question array
+    // Increment index so function acts on the next question 
     questionIndex++;
     // return   // *****???????
 }
@@ -96,7 +97,7 @@ document.addEventListener("click",function(event) {
         if (questionIndex <= questions.length) { 
             evaluateAnswer(event.target.id);  
         } else { // If all questions have been answered...
-            setTimeout(function(){ quizOver(); }, 1000); // SO WHAT HAPPENS WITH THE OTHER ONE?
+            setTimeout(function(){ quizOver(); }, 200); // Brief pause before leaving page
         }
     }
 });
