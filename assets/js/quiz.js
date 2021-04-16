@@ -32,7 +32,7 @@ var q5 = {
     correct: "button2"
 };
 
-// Array and index for questions  ****Could I just create an array of objects?????*******
+// Array and index for questions  
 var questions = [q1, q2, q3, q4, q5];
 var questionIndex = 0;
 
@@ -81,14 +81,20 @@ function evaluateAnswer(clickedBtn) {
     // If answer is correct...
     if (clickedBtn == questions[questionIndex-1].correct) {
         feedbackEl.textContent = "Correct!";
-        // increment counter for correct answers ******
+        // Increment counter for correct answers 
         correctAnswers++;
-    } else { // If answer is wrong...
+    } else {   // If answer is wrong...
         feedbackEl.textContent = "Answer is incorrect.";
         // Remove a few seconds from timer for wrong answer
         timeLeft = timeLeft - 2;
     }
-    askQuestion();  
+    // If we haven't already evaluated the last question...
+    // Display next question
+    if (questionIndex < questions.length) {
+        askQuestion();
+    } else {    // If we've evaluated the last question, quit
+        quizOver();
+    } 
 }
 
 // On button click, call function to evaluate answer (clicked button)
@@ -96,21 +102,16 @@ function evaluateAnswer(clickedBtn) {
 document.addEventListener("click",function(event) {
     // event.target was the clicked element
     // If the click is on a button...
-    if (event.target && event.target.matches("button")) {
-        // If we haven't already evaluated the last question...
-        if (questionIndex < questions.length) { 
-            evaluateAnswer(event.target.id);  
-        } else { // If all questions have been answered...
-            quizOver();
-        }
-    }
+    if (event.target && event.target.matches("button")) { 
+        evaluateAnswer(event.target.id);  
+    } 
 });
 
 // When time's up or all questions have been answered...
 function quizOver() {
     localStorage.setItem("CurrentQuiz", correctAnswers);
-    setTimeout(function(){ window.location.href = './quizover.html'; }, 800); // Brief pause before leaving page
-    // window.location.href = './quizover.html'; // **************
+    // setTimeout(function(){ window.location.href = './quizover.html'; }, 800); // Brief pause before leaving page
+    window.location.href = './quizover.html'; // **************
 }
 
 countdown();
