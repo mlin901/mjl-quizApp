@@ -10,7 +10,7 @@ var items = [];
 // console.log(score);
 
 scoreEl.textContent = "Your score: " + score; 
-mainTextEl.textContent = "Please enter your initials and press Return/Enter.";
+mainTextEl.textContent = "Please enter your initials and press Submit.";
 
 // Event listener adapted from 22-Stu_Local-Storage, 24-Stu_Local_Storage_Objects,
 // and 26-Stu_Local-Storage-Todos activities
