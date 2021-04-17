@@ -4,8 +4,7 @@ var timerEl = document.getElementById('countdown'); // Timer location
 var mainEl = document.getElementById('main'); // Question text location
 var feedbackEl = document.getElementById('feedback'); // Location for "correct" or "wrong"
 
-// Objects for questions and possible answers
-// Questions adapted from From https://www.w3schools.com/js/js_quiz.asp
+// Questions and possible answers (objects). Most questions adapted from from https://www.w3schools.com/js/js_quiz.asp
 var q1 = {
     q: "Which HTML tag do we use for JavaScript?", 
     answers: ["&lt;scripting&gt;", "&lt;js&gt;", "&lt;javascript&gt;", "&lt;script&gt;"],
@@ -31,7 +30,6 @@ var q5 = {
     answers: ["if i = 1 then", "if i == 1 then", "if (i == 1)", "if i = 1"],
     correct: "button2"
 };
-
 // Array and index for questions  
 var questions = [q1, q2, q3, q4, q5];
 var questionIndex = 0;
@@ -56,24 +54,23 @@ function askQuestion() {
             }
         }
     }
-    // Increment index so function acts on the next question 
+    // Increment index so next function invokation acts on the next question 
     questionIndex++;
-    // return   // *****???????
 }
 
-// Timer function (adapted from 10-Stu_timers-Intervals activity)
+// Timer countdown function (adapted from 10-Stu_timers-Intervals activity)
 function countdown() {
-  timerEl.textContent = timeLeft;
-  var timeInterval = setInterval(function () {
+    timerEl.textContent = timeLeft;
+    var timeInterval = setInterval(function () {
+    // If there's time remaining on the timer...
     if (timeLeft >= 1) {
-      timerEl.textContent = timeLeft;
-      timeLeft--;
+        timerEl.textContent = timeLeft;
+        timeLeft--;
     } else {
-    //   timerEl.textContent = '';
-      clearInterval(timeInterval);
-      quizOver();
+        clearInterval(timeInterval);
+        quizOver();  // If no time left on timer, quit quiz
     }
-  }, 1000);
+    }, 1000); // Count down by seconds
 }
 
 // Determine if user clicked the correct answer
@@ -88,10 +85,9 @@ function evaluateAnswer(clickedBtn) {
         // Remove a few seconds from timer for wrong answer
         timeLeft = timeLeft - 2;
     }
-    // If we haven't already evaluated the last question...
-    // Display next question
+    // If the last question hasn't already been evaluated...
     if (questionIndex < questions.length) {
-        askQuestion();
+        askQuestion();     // Display next question
     } else {    // If we've evaluated the last question, quit
         quizOver();
     } 
@@ -100,7 +96,7 @@ function evaluateAnswer(clickedBtn) {
 // On button click, call function to evaluate answer (clicked button)
 // (Adapted from https://davidwalsh.name/event-delegate)
 document.addEventListener("click",function(event) {
-    // event.target was the clicked element
+    // event.target is the clicked element
     // If the click is on a button...
     if (event.target && event.target.matches("button")) { 
         evaluateAnswer(event.target.id);  
@@ -111,7 +107,7 @@ document.addEventListener("click",function(event) {
 function quizOver() {
     localStorage.setItem("CurrentQuiz", correctAnswers);
     // setTimeout(function(){ window.location.href = './quizover.html'; }, 800); // Brief pause before leaving page
-    window.location.href = './quizover.html'; // **************
+    window.location.href = './quizover.html'; 
 }
 
 countdown();
