@@ -3,7 +3,12 @@ var orderNoteEl = document.querySelector("#orderNote");
 
 
 var scores = JSON.parse(localStorage.getItem("quizScores"));
-orderNoteEl.textContent = "Most recent score tops the list.";
+if (scores) {
+    orderNoteEl.textContent = "List starts with most recent score.";    
+} else {
+    orderNoteEl.textContent = "No scores available.";
+}
+
 
 for (var i = 0; i < scores.length; i++) {
     var score = scores[i];
