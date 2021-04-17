@@ -1,4 +1,4 @@
-/* .container { */
+/* Element styles */
 body {
     margin: auto;
     width: 100%;
@@ -6,10 +6,9 @@ body {
     text-align: center;
     display: inline-block;
   }
-  
-.container ul {
-    list-style-type: none; 
-    padding: 0;
+
+aside {
+    padding-top: 30px;
 }
 
 button {
@@ -20,17 +19,20 @@ button {
     margin-top: 4px;
 }
 
+/* Class styles */
+.welcome {
+  margin-bottom: 20px;
+}
+
+.container ul {
+    list-style-type: none; 
+    padding: 0;
+}
+
+/* ID styles */
 #done, #start {
     width: 80px;
     margin-top: 10px;
-}
-
-aside {
-    padding-top: 30px;
-}
-
-.welcome {
-    margin-bottom: 20px;
 }
   
 #main {
